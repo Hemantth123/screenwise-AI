@@ -1,67 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>ScreenWise — Slide 1 · Problem Understanding</title>
-  <link rel="stylesheet" href="global.css" />
+  <meta charset="UTF-8">
+  <title>ScreenWise · Slide 1 — Problem Understanding</title>
+  <link rel="stylesheet" href="global.css">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
-    .grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 16px; }
-    .card-tight { padding: 16px 18px; display: flex; flex-direction: column; gap: 6px; }
-    .card-label { font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--primary); }
-    .card-h { font-size: 18px; font-weight: 700; line-height: 1.25; color: var(--ink); }
-    .card-body { font-size: 13.5px; line-height: 1.5; color: var(--ink-2); }
-    .quote-line { font-style: italic; font-size: 12.5px; color: var(--ink-3); line-height: 1.5; }
-    .deco-blob { position: absolute; pointer-events: none; }
+    .diff-banner {
+      border-left: 4px solid var(--primary);
+      padding: 12px 16px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      line-height: 1.4;
+      border-radius: 12px;
+    }
+    .diff-banner .lbl {
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      color: var(--primary);
+      font-size: 12px;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      background: white;
+      border: 1px solid var(--primary-border);
+      border-radius: 999px;
+      flex-shrink: 0;
+    }
+    .card-eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--primary);
+    }
+    .pcard { padding: 16px 18px; }
+    .pcard h3 { margin-top: 6px; }
+    .pcard p { margin-top: 6px; font-size: 13.5px; line-height: 1.5; color: var(--ink-2); }
   </style>
 </head>
 <body>
   <div class="slide">
-    <!-- Decorative ghost numeral -->
-    <div data-decor aria-hidden="true" class="deco-blob" style="top: 28px; right: 56px; font-family: var(--font-num); font-weight: 700; font-size: 140px; color: var(--surface-2); line-height: 1; letter-spacing: -0.04em;">01</div>
+    <span class="eyebrow">PART 1 · PROBLEM UNDERSTANDING</span>
 
-    <!-- Top: eyebrow + headline + subhead -->
-    <div style="position: relative; z-index: 1;">
-      <div class="eyebrow">PART 1 · PROBLEM UNDERSTANDING</div>
-      <h1 class="h-display" style="margin-top: 14px; max-width: 1060px;">
-        Recruiters are drowning in resumes —<br/>and missing great candidates.
-      </h1>
-      <p class="body" style="margin-top: 12px; max-width: 1080px;">
-        For every open role, ~200 applicants. ~75% are unqualified — but finding the qualified 25% means reading every single line.
-      </p>
-    </div>
+    <h1 class="h-display" style="margin-top: 14px; max-width: 1100px;">
+      Recruiters are drowning in resumes —<br>and missing great candidates.
+    </h1>
 
-    <!-- 2x2 grid of supporting cards -->
-    <div class="grid-2x2" style="margin-top: 22px; flex: 1;">
-      <div class="card card-tight">
-        <div class="card-label">THE PROBLEM</div>
-        <div class="card-h">Volume vs. bandwidth</div>
-        <p class="card-body">200 resumes per role. ~90 seconds to read each one. By resume #40, judgment blurs — and the strongest candidate might be #180.</p>
-      </div>
-      <div class="card card-tight">
-        <div class="card-label">WHO IT HURTS</div>
-        <div class="card-h">In-house recruiters &amp; hiring managers</div>
-        <p class="card-body">Especially GCC talent-acquisition teams hiring at volume across multiple roles. The ones who care most about quality are also the most time-starved.</p>
-      </div>
-      <div class="card card-tight">
-        <div class="card-label">WHY IT MATTERS</div>
-        <div class="card-h">Time-to-hire = revenue</div>
-        <p class="card-body">Every unfilled engineering role costs ~$7K/day in lost output. Burnout is at record highs. And the best candidates get missed — not because they weren't qualified, but because no one had bandwidth to read them carefully.</p>
-      </div>
-      <div class="card card-tight" style="border-color: var(--primary-border); background: var(--primary-soft);">
-        <div class="card-label">WHAT SUCCESS LOOKS LIKE</div>
-        <div class="card-h">Minutes, not hours</div>
-        <p class="card-body">Cut first-pass screening from hours to minutes per role. Surface the top 10-15% with explainable reasoning. Free recruiters to actually talk to candidates instead of reading about them.</p>
-      </div>
-    </div>
-
-    <!-- Personal italic quote line -->
-    <p class="quote-line" style="margin-top: 14px; max-width: 1100px;">
-      "I picked this problem because I've watched friends on both sides — recruiters exhausted by resume piles, and strong candidates who never got a fair first read."
+    <p class="body muted" style="margin-top: 12px; max-width: 1080px;">
+      For every open role, ~200 applicants. ~75% are unqualified — but finding the qualified 25% means reading every single line, by hand, at 90 seconds each.
     </p>
 
-    <!-- Footer -->
+    <div class="grid grid-cols-2 gap-3" style="margin-top: 22px;">
+      <div class="card pcard">
+        <div class="card-eyebrow">THE PROBLEM</div>
+        <h3 class="h3">Volume vs. bandwidth</h3>
+        <p>200 resumes per role × 90 seconds each = ~5 hours of pure reading. By resume #40, judgment blurs — and the strongest candidate might be #180.</p>
+      </div>
+      <div class="card pcard">
+        <div class="card-eyebrow">WHO IT HURTS</div>
+        <h3 class="h3">In-house TA teams hiring at volume</h3>
+        <p>Especially GCC talent-acquisition teams filling multiple roles simultaneously. The teams who care most about quality are also the most time-starved.</p>
+      </div>
+      <div class="card pcard">
+        <div class="card-eyebrow">WHY IT MATTERS</div>
+        <h3 class="h3">Time-to-hire = revenue</h3>
+        <p>Every unfilled engineering role costs ~$7K/day in lost output. The best candidates get missed — not because they weren't qualified, but because no one had bandwidth to read them carefully.</p>
+      </div>
+      <div class="card pcard">
+        <div class="card-eyebrow">WHAT SUCCESS LOOKS LIKE</div>
+        <h3 class="h3">Minutes, not hours</h3>
+        <p>Cut first-pass screening from hours to minutes per role. Surface the top 10% with explainable reasoning. Free recruiters to talk to candidates instead of reading about them.</p>
+      </div>
+    </div>
+
+    <div class="card-emerald diff-banner" style="margin-top: 18px;">
+      <span class="lbl">Our bet</span>
+      <span>EXPLAINABLE AI — every score comes with matched skills, missing skills, and written reasoning. No black boxes.</span>
+    </div>
+
     <div class="slide-footer">
       <div class="brand"><span class="dot"></span>ScreenWise · Embark Assignment</div>
       <div class="num">01 / 06</div>
@@ -69,11 +90,11 @@
   </div>
 
   <aside data-notes class="hidden" style="display:none">
-    - Open by acknowledging the recruiter pain point — I've seen it firsthand through friends on both sides of the hiring table.
-    - Anchor on the math: 200 resumes × 90 seconds = 5 hours of pure reading per role, with judgment degrading fast.
-    - Emphasize that the qualified 25% are getting missed NOT because they're weak, but because nobody has bandwidth to find them.
-    - Tie it to dollars: $7K/day per unfilled eng role. This is a revenue problem, not an HR nicety.
-    - Land the success bar early — minutes not hours, top 10-15% with explainable reasoning. That's what we're building toward.
+    - Open with the human cost: 200 resumes, 90 seconds each, 5 hours of pure reading per role.
+    - Make the GCC angle explicit — those TA teams care most about quality and have the least time.
+    - Quantify the revenue pain: roughly $7K/day per unfilled engineering role.
+    - Frame success as minutes not hours, with explainable scores recruiters can defend.
+    - End by foreshadowing the deck's differentiator: explainable AI, not another black-box ranker.
   </aside>
 </body>
 </html>

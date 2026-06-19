@@ -1,0 +1,592 @@
+{
+  "experiment": {
+    "resumes": 25,
+    "jobDescriptions": 3,
+    "totalEvaluations": 75,
+    "archetypes": [
+      "backend (5)",
+      "frontend (5)",
+      "data (5)",
+      "pm (5)",
+      "mobile (5)"
+    ],
+    "groundTruthMethod": "Manual label per (JD, resume) pair based on archetype match. Strong = primary match, Possible = adjacent transferable skills, Pass = wrong track.",
+    "manualScreeningAssumption": "90 seconds per resume (industry standard for first-pass)",
+    "reviewAssumption": "10 minutes recruiter review of AI output per JD"
+  },
+  "overall": {
+    "totalResumes": 25,
+    "totalJDs": 3,
+    "totalEvaluations": 75,
+    "avgPrecisionAt10": 60,
+    "avgLabelAgreement": 66.7,
+    "avgTimeSavedPct": 69.5
+  },
+  "perJD": [
+    {
+      "jd": "backend",
+      "precisionAt10": 50,
+      "precisionHits": 5,
+      "labelAgreement": 68,
+      "agreementCount": 17,
+      "totalCandidates": 25,
+      "manualTimeMin": 37.5,
+      "aiTimeMin": 11.6,
+      "timeSavedPct": 68.9,
+      "aiRanking": [
+        {
+          "id": 0,
+          "archetype": "backend",
+          "score": 92,
+          "recommendation": "Strong Fit",
+          "truth": "Strong Fit"
+        },
+        {
+          "id": 4,
+          "archetype": "backend",
+          "score": 82,
+          "recommendation": "Strong Fit",
+          "truth": "Strong Fit"
+        },
+        {
+          "id": 3,
+          "archetype": "backend",
+          "score": 75,
+          "recommendation": "Possible Fit",
+          "truth": "Strong Fit"
+        },
+        {
+          "id": 1,
+          "archetype": "backend",
+          "score": 65,
+          "recommendation": "Possible Fit",
+          "truth": "Strong Fit"
+        },
+        {
+          "id": 2,
+          "archetype": "backend",
+          "score": 58,
+          "recommendation": "Pass",
+          "truth": "Strong Fit"
+        },
+        {
+          "id": 9,
+          "archetype": "frontend",
+          "score": 45,
+          "recommendation": "Pass",
+          "truth": "Pass"
+        },
+        {
+          "id": 8,
+          "archetype": "frontend",
+          "score": 40,
+          "recommendation": "Pass",
+          "truth": "Pass"
+        },
+        {
+          "id": 7,
+          "archetype": "frontend",
+          "score": 35,
+          "recommendation": "Pass",
+          "truth": "Pass"
+        },
+        {
+          "id": 23,
+          "archetype": "mobile",
+          "score": 35,
+          "recommendation": "Pass",
+          "truth": "Pass"
+        },
+        {
+          "id": 6,
+          "archetype": "frontend",
+          "score": 30,
+          "recommendation": "Pass",
+          "truth": "Pass"
+        },
+        {
+          "id": 13,
+          "archetype": "data",
+          "score": 30,
+          "recommendation": "Pass",
+          "truth": "Possible Fit"
+        },
+        {
+          "id": 22,
+          "archetype": "mobile",
+          "score": 30,
+          "recommendation": "Pass",
+          "truth": "Pass"
+        },
+        {
+          "id": 24,
+          "archetype": "mobile",
+          "score": 30,
+          "recommendation": "Pass",
+          "truth": "Pass"
+        },
+        {
+          "id": 5,
+          "archetype": "frontend",
+          "score": 25,
+          "recommendation": "Pass",
+          "truth": "Pass"
+        },
+        {
+          "id": 12,
+          "archetype": "data",
+          "score": 25,
+          "recommendation": "Pass",
+          "truth": "Possible Fit"
+        },
+        {
+          "id": 20,
+          "archetype": "mobile",
+          "score": 25,
+          "recommendation": "Pass",
+          "truth": "Pass"
+        },
+        {
+          "id": 21,
+          "archetype": "mobile",
+          "score": 25,
+          "recommendation": "Pass",
+          "truth": "Pass"
+        },
+        {
+          "id": 11,
+          "archetype": "data",
+          "score": 20,
+          "recommendation": "Pass",
+          "truth": "Possible Fit"
+        },
+        {
+          "id": 14,
+          "archetype": "data",
+          "score": 20,
+          "recommendation": "Pass",
+          "truth": "Possible Fit"
+        },
+        {
+          "id": 10,
+          "archetype": "data",
+          "score": 15,
+          "recommendation": "Pass",
+          "truth": "Possible Fit"
+        },
+        {
+          "id": 15,
+          "archetype": "pm",
+          "score": 15,
+          "recommendation": "Pass",
+          "truth": "Pass"
+        },
+        {
+          "id": 16,
+          "archetype": "pm",
+          "score": 15,
+          "recommendation": "Pass",
+          "truth": "Pass"
+        },
+        {
+          "id": 17,
+          "archetype": "pm",
+          "score": 15,
+          "recommendation": "Pass",
+          "truth": "Pass"
+        },
+        {
+          "id": 18,
+          "archetype": "pm",
+          "score": 15,
+          "recommendation": "Pass",
+          "truth": "Pass"
+        },
+        {
+          "id": 19,
+          "archetype": "pm",
+          "score": 15,
+          "recommendation": "Pass",
+          "truth": "Pass"
+        }
+      ]
+    },
+    {
+      "jd": "frontend",
+      "precisionAt10": 70,
+      "precisionHits": 7,
+      "labelAgreement": 68,
+      "agreementCount": 17,
+      "totalCandidates": 25,
+      "manualTimeMin": 37.5,
+      "aiTimeMin": 11.4,
+      "timeSavedPct": 69.6,
+      "aiRanking": [
+        {
+          "id": 5,
+          "archetype": "frontend",
+          "score": 85,
+          "recommendation": "Strong Fit",
+          "truth": "Strong Fit"
+        },
+        {
+          "id": 6,
+          "archetype": "frontend",
+          "score": 75,
+          "recommendation": "Possible Fit",
+          "truth": "Strong Fit"
+        },
+        {
+          "id": 9,
+          "archetype": "frontend",
+          "score": 75,
+          "recommendation": "Possible Fit",
+          "truth": "Strong Fit"
+        },
+        {
+          "id": 7,
+          "archetype": "frontend",
+          "score": 70,
+          "recommendation": "Possible Fit",
+          "truth": "Strong Fit"
+        },
+        {
+          "id": 8,
+          "archetype": "frontend",
+          "score": 65,
+          "recommendation": "Possible Fit",
+          "truth": "Strong Fit"
+        },
+        {
+          "id": 23,
+          "archetype": "mobile",
+          "score": 55,
+          "recommendation": "Possible Fit",
+          "truth": "Possible Fit"
+        },
+        {
+          "id": 4,
+          "archetype": "backend",
+          "score": 40,
+          "recommendation": "Pass",
+          "truth": "Pass"
+        },
+        {
+          "id": 3,
+          "archetype": "backend",
+          "score": 35,
+          "recommendation": "Pass",
+          "truth": "Pass"
+        },
+        {
+          "id": 0,
+          "archetype": "backend",
+          "score": 25,
+          "recommendation": "Pass",
+          "truth": "Pass"
+        },
+        {
+          "id": 22,
+          "archetype": "mobile",
+          "score": 25,
+          "recommendation": "Pass",
+          "truth": "Possible Fit"
+        },
+        {
+          "id": 24,
+          "archetype": "mobile",
+          "score": 25,
+          "recommendation": "Pass",
+          "truth": "Possible Fit"
+        },
+        {
+          "id": 1,
+          "archetype": "backend",
+          "score": 20,
+          "recommendation": "Pass",
+          "truth": "Pass"
+        },
+        {
+          "id": 2,
+          "archetype": "backend",
+          "score": 20,
+          "recommendation": "Pass",
+          "truth": "Pass"
+        },
+        {
+          "id": 12,
+          "archetype": "data",
+          "score": 20,
+          "recommendation": "Pass",
+          "truth": "Pass"
+        },
+        {
+          "id": 10,
+          "archetype": "data",
+          "score": 15,
+          "recommendation": "Pass",
+          "truth": "Pass"
+        },
+        {
+          "id": 11,
+          "archetype": "data",
+          "score": 15,
+          "recommendation": "Pass",
+          "truth": "Pass"
+        },
+        {
+          "id": 13,
+          "archetype": "data",
+          "score": 15,
+          "recommendation": "Pass",
+          "truth": "Pass"
+        },
+        {
+          "id": 14,
+          "archetype": "data",
+          "score": 15,
+          "recommendation": "Pass",
+          "truth": "Pass"
+        },
+        {
+          "id": 15,
+          "archetype": "pm",
+          "score": 15,
+          "recommendation": "Pass",
+          "truth": "Pass"
+        },
+        {
+          "id": 16,
+          "archetype": "pm",
+          "score": 15,
+          "recommendation": "Pass",
+          "truth": "Pass"
+        },
+        {
+          "id": 17,
+          "archetype": "pm",
+          "score": 15,
+          "recommendation": "Pass",
+          "truth": "Pass"
+        },
+        {
+          "id": 18,
+          "archetype": "pm",
+          "score": 15,
+          "recommendation": "Pass",
+          "truth": "Pass"
+        },
+        {
+          "id": 19,
+          "archetype": "pm",
+          "score": 15,
+          "recommendation": "Pass",
+          "truth": "Pass"
+        },
+        {
+          "id": 20,
+          "archetype": "mobile",
+          "score": 15,
+          "recommendation": "Pass",
+          "truth": "Possible Fit"
+        },
+        {
+          "id": 21,
+          "archetype": "mobile",
+          "score": 15,
+          "recommendation": "Pass",
+          "truth": "Possible Fit"
+        }
+      ]
+    },
+    {
+      "jd": "data",
+      "precisionAt10": 60,
+      "precisionHits": 6,
+      "labelAgreement": 64,
+      "agreementCount": 16,
+      "totalCandidates": 25,
+      "manualTimeMin": 37.5,
+      "aiTimeMin": 11.3,
+      "timeSavedPct": 69.9,
+      "aiRanking": [
+        {
+          "id": 13,
+          "archetype": "data",
+          "score": 90,
+          "recommendation": "Strong Fit",
+          "truth": "Strong Fit"
+        },
+        {
+          "id": 10,
+          "archetype": "data",
+          "score": 85,
+          "recommendation": "Strong Fit",
+          "truth": "Strong Fit"
+        },
+        {
+          "id": 12,
+          "archetype": "data",
+          "score": 80,
+          "recommendation": "Strong Fit",
+          "truth": "Strong Fit"
+        },
+        {
+          "id": 11,
+          "archetype": "data",
+          "score": 75,
+          "recommendation": "Possible Fit",
+          "truth": "Strong Fit"
+        },
+        {
+          "id": 14,
+          "archetype": "data",
+          "score": 70,
+          "recommendation": "Possible Fit",
+          "truth": "Strong Fit"
+        },
+        {
+          "id": 19,
+          "archetype": "pm",
+          "score": 62,
+          "recommendation": "Possible Fit",
+          "truth": "Pass"
+        },
+        {
+          "id": 17,
+          "archetype": "pm",
+          "score": 60,
+          "recommendation": "Possible Fit",
+          "truth": "Pass"
+        },
+        {
+          "id": 15,
+          "archetype": "pm",
+          "score": 58,
+          "recommendation": "Pass",
+          "truth": "Pass"
+        },
+        {
+          "id": 18,
+          "archetype": "pm",
+          "score": 57,
+          "recommendation": "Pass",
+          "truth": "Pass"
+        },
+        {
+          "id": 2,
+          "archetype": "backend",
+          "score": 55,
+          "recommendation": "Pass",
+          "truth": "Possible Fit"
+        },
+        {
+          "id": 16,
+          "archetype": "pm",
+          "score": 55,
+          "recommendation": "Pass",
+          "truth": "Pass"
+        },
+        {
+          "id": 1,
+          "archetype": "backend",
+          "score": 50,
+          "recommendation": "Pass",
+          "truth": "Possible Fit"
+        },
+        {
+          "id": 3,
+          "archetype": "backend",
+          "score": 50,
+          "recommendation": "Pass",
+          "truth": "Possible Fit"
+        },
+        {
+          "id": 0,
+          "archetype": "backend",
+          "score": 45,
+          "recommendation": "Pass",
+          "truth": "Possible Fit"
+        },
+        {
+          "id": 4,
+          "archetype": "backend",
+          "score": 45,
+          "recommendation": "Pass",
+          "truth": "Possible Fit"
+        },
+        {
+          "id": 9,
+          "archetype": "frontend",
+          "score": 45,
+          "recommendation": "Pass",
+          "truth": "Pass"
+        },
+        {
+          "id": 8,
+          "archetype": "frontend",
+          "score": 40,
+          "recommendation": "Pass",
+          "truth": "Pass"
+        },
+        {
+          "id": 7,
+          "archetype": "frontend",
+          "score": 35,
+          "recommendation": "Pass",
+          "truth": "Pass"
+        },
+        {
+          "id": 6,
+          "archetype": "frontend",
+          "score": 30,
+          "recommendation": "Pass",
+          "truth": "Pass"
+        },
+        {
+          "id": 5,
+          "archetype": "frontend",
+          "score": 25,
+          "recommendation": "Pass",
+          "truth": "Pass"
+        },
+        {
+          "id": 20,
+          "archetype": "mobile",
+          "score": 15,
+          "recommendation": "Pass",
+          "truth": "Pass"
+        },
+        {
+          "id": 21,
+          "archetype": "mobile",
+          "score": 15,
+          "recommendation": "Pass",
+          "truth": "Pass"
+        },
+        {
+          "id": 22,
+          "archetype": "mobile",
+          "score": 15,
+          "recommendation": "Pass",
+          "truth": "Pass"
+        },
+        {
+          "id": 23,
+          "archetype": "mobile",
+          "score": 15,
+          "recommendation": "Pass",
+          "truth": "Pass"
+        },
+        {
+          "id": 24,
+          "archetype": "mobile",
+          "score": 15,
+          "recommendation": "Pass",
+          "truth": "Pass"
+        }
+      ]
+    }
+  ],
+  "generatedAt": "2026-06-19T12:22:27.508Z"
+}

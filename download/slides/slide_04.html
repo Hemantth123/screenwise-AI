@@ -1,132 +1,235 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>ScreenWise — Slide 4 · AI Approach</title>
-  <link rel="stylesheet" href="global.css" />
+  <meta charset="UTF-8">
+  <title>ScreenWise · Slide 4 — AI Architecture + Reliability + Bias</title>
+  <link rel="stylesheet" href="global.css">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
-    .col-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; flex: 1; min-height: 0; }
-    .col-card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 0; display: flex; flex-direction: column; overflow: hidden; }
-    .col-strip { height: 4px; width: 100%; }
-    .col-strip.emerald { background: var(--primary); }
-    .col-strip.amber { background: var(--accent); }
-    .col-strip.slate { background: var(--ink-3); }
-    .col-inner { padding: 14px 16px 14px; display: flex; flex-direction: column; flex: 1; }
-    .col-head { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
-    .col-head .material-icons { font-size: 20px; }
-    .col-head h3 { font-size: 16px; font-weight: 700; color: var(--ink); line-height: 1.2; }
-
-    .col-card .bullets, .col-card .bullets-slate { margin: 0; }
-    .col-card .bullets li, .col-card .bullets-slate li {
+    .diff-banner {
+      border-left: 4px solid var(--primary);
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      line-height: 1.4;
+      border-radius: 12px;
+    }
+    .diff-banner .lbl {
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      color: var(--primary);
       font-size: 11.5px;
-      line-height: 1.45;
-      margin-bottom: 7px;
-      padding-left: 16px;
-      color: var(--ink-2);
+      text-transform: uppercase;
+      padding: 2px 8px;
+      background: white;
+      border: 1px solid var(--primary-border);
+      border-radius: 999px;
+      flex-shrink: 0;
     }
-    .col-card .bullets li::before, .col-card .bullets-slate li::before {
-      width: 6px; height: 6px; top: 7px; left: 0;
+    .col-h {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 17px; font-weight: 700; color: var(--ink);
+      letter-spacing: -0.01em;
+      margin-bottom: 10px;
     }
-    .col-card .bullets li:last-child, .col-card .bullets-slate li:last-child { margin-bottom: 0; }
+    .col-h .material-icons { font-size: 19px; color: var(--primary); }
 
-    .arrow-row { display: flex; align-items: flex-start; gap: 8px; padding: 6px 0; border-top: 1px dashed var(--line); }
-    .arrow-row:first-of-type { border-top: 0; padding-top: 2px; }
-    .arrow-glyph { color: var(--primary); font-weight: 700; font-family: var(--font-num); font-size: 13px; line-height: 1.45; flex-shrink: 0; }
-    .arrow-text { font-size: 11.5px; line-height: 1.45; color: var(--ink-2); }
-    .arrow-text b { color: var(--ink); font-weight: 700; }
+    /* Architecture diagram */
+    .arch-box {
+      display: flex; align-items: center; gap: 12px;
+      padding: 8px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: white;
+      min-height: 46px;
+    }
+    .arch-box .material-icons { font-size: 20px; color: var(--primary); flex-shrink: 0; }
+    .arch-box.emerald { border-left: 4px solid var(--primary); background: var(--primary-soft); }
+    .arch-box.slate { border-left: 4px solid var(--ink-4); }
+    .arch-box.amber { border-left: 4px solid var(--accent); background: var(--accent-soft); }
+    .arch-box.amber .material-icons { color: var(--accent); }
+    .arch-box.highlight {
+      border: 2px solid var(--primary);
+      background: var(--primary-soft);
+      box-shadow: 0 2px 8px rgba(5, 150, 105, 0.18);
+    }
+    .arch-box.highlight .material-icons { color: var(--primary); }
+    .arch-label { font-weight: 700; font-size: 12.5px; color: var(--ink); line-height: 1.2; }
+    .arch-desc { font-size: 11px; color: var(--ink-3); line-height: 1.3; }
+    .arch-arrow {
+      text-align: center;
+      font-size: 18px;
+      color: var(--primary);
+      line-height: 1;
+      margin: 3px 0;
+      font-weight: 700;
+    }
+    .arch-micro {
+      font-size: 10.5px; color: var(--ink-3); margin-top: 8px;
+      line-height: 1.4; font-style: italic;
+    }
 
-    .quote-line { font-style: italic; font-size: 12.5px; color: var(--ink-3); line-height: 1.5; text-align: center; }
+    /* Right cards */
+    .rcard {
+      border-radius: 11px;
+      padding: 10px 14px 12px;
+      border: 1px solid var(--line);
+      background: white;
+    }
+    .rcard.emerald-top { border-top: 4px solid var(--primary); }
+    .rcard.amber-top { border-top: 4px solid var(--accent); background: var(--accent-soft); border-color: #fde68a; }
+    .rcard.emerald-bg { border-top: 4px solid var(--primary); background: var(--primary-soft); border-color: var(--primary-border); }
+    .rcard-h {
+      display: flex; align-items: center; gap: 7px;
+      font-size: 14.5px; font-weight: 700; color: var(--ink);
+      margin-bottom: 6px;
+    }
+    .rcard-h .material-icons { font-size: 17px; color: var(--primary); }
+    .rcard.amber-top .rcard-h .material-icons { color: var(--accent); }
+    .rcard ul { list-style: none; padding: 0; margin: 0; }
+    .rcard ul li {
+      position: relative; padding-left: 16px;
+      font-size: 11.5px; line-height: 1.4;
+      color: var(--ink-2); margin-bottom: 4px;
+    }
+    .rcard ul li::before {
+      content: ""; position: absolute; left: 0; top: 6px;
+      width: 6px; height: 6px; border-radius: 1px; background: var(--primary);
+    }
+    .rcard.amber-top ul li::before { background: var(--accent); }
+    .rcard.amber-top ul li { color: #78350f; }
+    .rcard .bold-line {
+      font-size: 12px; font-weight: 700; color: var(--primary-dark);
+      margin-bottom: 4px;
+    }
   </style>
 </head>
 <body>
-  <div class="slide">
-    <!-- Top -->
-    <div>
-      <div class="eyebrow">PART 3 · AI APPROACH</div>
-      <h1 class="h1" style="margin-top: 10px; max-width: 1130px;">
-        A calibrated LLM evaluator with structured output and a human in the loop.
-      </h1>
-      <p class="body" style="margin-top: 6px; max-width: 1130px;">
-        One model does the whole pipeline. The hard part isn't picking a model — it's writing the rubric and forcing the model to be honest.
-      </p>
-    </div>
+  <div class="slide slide-tight">
+    <span class="eyebrow">PART 3 · AI APPROACH</span>
 
-    <!-- 3 columns -->
-    <div class="col-grid" style="margin-top: 16px;">
-      <!-- COLUMN 1: Model & tools -->
-      <div class="col-card">
-        <div class="col-strip emerald"></div>
-        <div class="col-inner">
-          <div class="col-head">
-            <i class="material-icons" style="color: var(--primary);">memory</i>
-            <h3>Model &amp; tools</h3>
-          </div>
-          <ul class="bullets">
-            <li><b style="color: var(--ink);">GPT-4-class LLM</b> via z-ai-web-dev-sdk — one structured call per batch</li>
-            <li>Next.js 16 API route server-side — SDK never touches the browser</li>
-            <li>JSON schema output — no free-text parsing, ever</li>
-            <li>No embeddings or classifiers for v0.1 — the LLM reasons about BOTH "does this candidate have AWS ECS?" AND "is 4 jobs in 4 years a red flag?" in a single pass. Stitching 4 specialized models would be over-engineering for a prototype.</li>
-          </ul>
-        </div>
-      </div>
+    <h1 class="h1" style="margin-top: 10px; max-width: 1140px;">
+      Schema-constrained LLM pipeline with bias guardrails and a human in the loop.
+    </h1>
 
-      <!-- COLUMN 2: How AI is used -->
-      <div class="col-card">
-        <div class="col-strip amber"></div>
-        <div class="col-inner">
-          <div class="col-head">
-            <i class="material-icons" style="color: #b45309;">auto_awesome</i>
-            <h3>How AI is used</h3>
-          </div>
-          <div style="display: flex; flex-direction: column;">
-            <div class="arrow-row">
-              <span class="arrow-glyph">→</span>
-              <div class="arrow-text"><b>JD</b> → structured must-haves, nice-to-haves, seniority, domain</div>
-            </div>
-            <div class="arrow-row">
-              <span class="arrow-glyph">→</span>
-              <div class="arrow-text"><b>Resume</b> → normalized profile (skills, scope, trajectory)</div>
-            </div>
-            <div class="arrow-row">
-              <span class="arrow-glyph">→</span>
-              <div class="arrow-text"><b>Score</b> → 0–100 across 5 weighted signals, with per-candidate reasoning</div>
-            </div>
-            <div class="arrow-row">
-              <span class="arrow-glyph">→</span>
-              <div class="arrow-text"><b>Outreach</b> → 2-paragraph email referencing a SPECIFIC resume detail (project, metric, role)</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- COLUMN 3: Quality & reliability -->
-      <div class="col-card">
-        <div class="col-strip slate"></div>
-        <div class="col-inner">
-          <div class="col-head">
-            <i class="material-icons" style="color: var(--ink-3);">verified</i>
-            <h3>Quality &amp; reliability</h3>
-          </div>
-          <ul class="bullets-slate">
-            <li>Explicit rubric in the prompt — the model isn't guessing what "good" means</li>
-            <li>Structured JSON schema — parsing failures are caught, not silent</li>
-            <li>Calibrated thresholds — Strong Fit (≥80) is intentionally rare. Most candidates land in Possible (60–79) or Pass (&lt;60)</li>
-            <li>Bias guardrails in system prompt — judge on skills, scope, trajectory ONLY; never on name, gender, age, or university prestige</li>
-            <li>Human-in-the-loop — ScreenWise recommends, the recruiter decides. No auto-reject.</li>
-            <li>Future: dual-pass scoring on borderline calls; embeddings for semantic skill matching at scale (so "TS" matches "TypeScript")</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- Quote line -->
-    <p class="quote-line" style="margin-top: 12px;">
-      "The first version of the prompt gave almost everyone 75+. The fix wasn't a bigger model — it was telling the model that Strong Fit should be rare."
+    <p class="body muted" style="margin-top: 6px; max-width: 1140px;">
+      One model does the whole pipeline. The hard part isn't picking a model — it's forcing structured output and calibrating honesty.
     </p>
 
-    <!-- Footer -->
+    <div class="grid gap-5" style="margin-top: 14px; grid-template-columns: 42% 58%;">
+      <!-- LEFT — architecture diagram -->
+      <div>
+        <div class="col-h">
+          <i class="material-icons">account_tree</i>
+          <span>Architecture</span>
+        </div>
+
+        <div class="arch-box emerald">
+          <i class="material-icons">web</i>
+          <div>
+            <div class="arch-label">Recruiter UI</div>
+            <div class="arch-desc">Next.js 16 + React + shadcn/ui</div>
+          </div>
+        </div>
+        <div class="arch-arrow">↓</div>
+        <div class="arch-box slate">
+          <i class="material-icons">api</i>
+          <div>
+            <div class="arch-label">Next.js API Route (/api/screen)</div>
+            <div class="arch-desc">Server-side, Node runtime</div>
+          </div>
+        </div>
+        <div class="arch-arrow">↓</div>
+        <div class="arch-box slate">
+          <i class="material-icons">description</i>
+          <div>
+            <div class="arch-label">Resume text + JD text</div>
+            <div class="arch-desc">Paste input (PDF parsing = v1.1)</div>
+          </div>
+        </div>
+        <div class="arch-arrow">↓</div>
+        <div class="arch-box emerald highlight">
+          <i class="material-icons">psychology</i>
+          <div>
+            <div class="arch-label">GPT-4-class LLM via z-ai-web-dev-sdk</div>
+            <div class="arch-desc">Schema-constrained JSON output</div>
+          </div>
+        </div>
+        <div class="arch-arrow">↓</div>
+        <div class="arch-box amber">
+          <i class="material-icons">rule</i>
+          <div>
+            <div class="arch-label">JSON Schema Validation</div>
+            <div class="arch-desc">Parsing failures caught, not silent</div>
+          </div>
+        </div>
+        <div class="arch-arrow">↓</div>
+        <div class="arch-box emerald">
+          <i class="material-icons">format_list_numbered</i>
+          <div>
+            <div class="arch-label">Ranked candidates + outreach drafts</div>
+            <div class="arch-desc">With per-signal reasoning</div>
+          </div>
+        </div>
+
+        <div class="arch-micro">
+          v1.1 adds: PDF parsing → Embeddings → Vector store for semantic skill matching (so "TS" matches "TypeScript").
+        </div>
+      </div>
+
+      <!-- RIGHT — 3 cards -->
+      <div>
+        <div class="rcard emerald-top" style="margin-bottom: 10px;">
+          <div class="rcard-h">
+            <i class="material-icons">verified</i>
+            <span>Reliability</span>
+          </div>
+          <ul>
+            <li>Schema-constrained structured outputs — JSON schema enforced, no free-text parsing</li>
+            <li>Confidence thresholds — Strong Fit (≥80) is rare by design; borderline scores (60-79) flagged for human review</li>
+            <li>Human-in-the-loop — ScreenWise recommends, the recruiter decides. No auto-reject.</li>
+            <li>Audit logs — every score, reasoning, and recruiter override recorded for review</li>
+          </ul>
+        </div>
+
+        <div class="rcard amber-top" style="margin-bottom: 10px;">
+          <div class="rcard-h">
+            <i class="material-icons">shield</i>
+            <span>Bias mitigation</span>
+          </div>
+          <ul>
+            <li>Name-blind scoring option — demographic signals stripped before evaluation</li>
+            <li>University-blind scoring option — prestige bias removed from trajectory assessment</li>
+            <li>Calibration line in system prompt — explicit instruction to judge on skills, scope, trajectory ONLY</li>
+            <li>Future: bias-audit dashboard tracking score distributions across demographic proxies</li>
+          </ul>
+        </div>
+
+        <div class="rcard emerald-bg">
+          <div class="rcard-h">
+            <i class="material-icons">savings</i>
+            <span>Cost awareness</span>
+          </div>
+          <div class="bold-line">~$1-3 per 200 resumes (LLM scoring).</div>
+          <ul>
+            <li>Batch processing — 8-10 resumes per API call amortizes the JD context</li>
+            <li>Response caching — identical (JD, resume) pairs served from cache</li>
+            <li>Future: embedding reuse — semantic skill matching without re-calling the LLM</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-emerald diff-banner" style="margin-top: 6px;">
+      <span class="lbl">Explainable AI</span>
+      <span>Schema-constrained outputs + per-signal reasoning + audit logs = a pipeline you can defend to a hiring manager.</span>
+    </div>
+
     <div class="slide-footer">
       <div class="brand"><span class="dot"></span>ScreenWise · Embark Assignment</div>
       <div class="num">04 / 06</div>
@@ -134,11 +237,11 @@
   </div>
 
   <aside data-notes class="hidden" style="display:none">
-    - Lead with the thesis: the model choice is the easy part. The hard part is the rubric + forcing honesty.
-    - One model, one structured call per batch. No embeddings, no ensemble — that's deliberate over-engineering avoidance for v0.1.
-    - Walk through the 4 arrows: JD → brief, resume → profile, score → 5 weighted signals, outreach → specific-detail email.
-    - Stress the calibration story: first prompt gave everyone 75+. Fix wasn't a bigger model — it was an explicit rule that Strong Fit should be rare.
-    - Close on bias guardrails + human-in-the-loop. ScreenWise recommends, never auto-rejects. This is the ethics answer.
+    - Walk the architecture top to bottom: UI → API route → text inputs → LLM (the highlighted box) → schema validation → ranked output.
+    - Stress that one model does the whole pipeline — the hard part is forcing structured JSON output, not picking a model.
+    - Reliability: schema-constrained outputs, confidence thresholds, human-in-the-loop, audit logs.
+    - Bias mitigation: name-blind + university-blind options, calibration line, future bias-audit dashboard.
+    - Cost: roughly $1-3 per 200 resumes via batching + caching, with embedding reuse on the roadmap.
   </aside>
 </body>
 </html>

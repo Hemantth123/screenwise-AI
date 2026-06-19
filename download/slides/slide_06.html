@@ -1,127 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>ScreenWise — Slide 6 · Reflection</title>
-  <link rel="stylesheet" href="global.css" />
+  <meta charset="UTF-8">
+  <title>ScreenWise · Slide 6 — Reflection + Roadmap</title>
+  <link rel="stylesheet" href="global.css">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
-    .grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 16px; flex: 1; min-height: 0; }
-    .ref-card { padding: 14px 18px 14px; display: flex; flex-direction: column; gap: 6px; }
-    .ref-label-row { display: flex; align-items: center; gap: 6px; }
-    .ref-label { font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
-    .ref-label.emerald { color: var(--primary); }
-    .ref-label.amber { color: #92400e; }
-    .ref-label-row .material-icons { font-size: 15px; }
-    .ref-title { font-size: 16px; font-weight: 700; color: var(--ink); line-height: 1.25; }
-    .ref-body { font-size: 12px; line-height: 1.5; color: var(--ink-2); }
+    .diff-banner {
+      border-left: 4px solid var(--primary);
+      padding: 9px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      line-height: 1.4;
+      border-radius: 11px;
+    }
+    .diff-banner .lbl {
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      color: var(--primary);
+      font-size: 10.5px;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      background: white;
+      border: 1px solid var(--primary-border);
+      border-radius: 999px;
+      flex-shrink: 0;
+    }
+    .rcard {
+      padding: 12px 14px;
+      border-radius: 11px;
+      border: 1px solid var(--line);
+      background: white;
+      display: flex; flex-direction: column;
+    }
+    .rcard.amber { background: var(--accent-soft); border-color: #fde68a; }
+    .rcard.emerald { background: var(--primary-soft); border-color: var(--primary-border); }
+    .rcard .lbl {
+      font-size: 9.5px; font-weight: 800; letter-spacing: 0.1em;
+      text-transform: uppercase;
+      display: inline-flex; align-items: center; gap: 5px;
+    }
+    .rcard .lbl .material-icons { font-size: 14px; }
+    .rcard h3 { font-size: 15px; font-weight: 700; line-height: 1.25; margin-top: 4px; color: var(--ink); }
+    .rcard p { font-size: 11.5px; line-height: 1.45; color: var(--ink-2); margin-top: 6px; }
+    .rcard.amber p { color: #78350f; }
 
-    .ref-bullets { list-style: none; padding: 0; margin: 0; }
-    .ref-bullets li { position: relative; padding-left: 16px; margin-bottom: 4px; font-size: 12px; line-height: 1.45; color: var(--ink-2); }
-    .ref-bullets li::before { content: ""; position: absolute; left: 0; top: 7px; width: 6px; height: 6px; border-radius: 2px; background: var(--primary); }
-
-    .note-bar {
+    .roadmap {
+      padding: 11px 14px;
+      border-radius: 11px;
       background: var(--surface-2);
       border: 1px solid var(--line);
-      border-left: 4px solid var(--primary);
-      border-radius: 10px;
-      padding: 12px 18px;
-      margin-top: 14px;
     }
-    .note-text { font-style: italic; font-size: 13px; line-height: 1.55; color: var(--ink-2); }
+    .roadmap .rh {
+      display: flex; align-items: center; gap: 7px;
+      font-size: 13px; font-weight: 700; color: var(--ink);
+      margin-bottom: 6px;
+    }
+    .roadmap .rh .material-icons { font-size: 16px; color: var(--primary); }
+    .roadmap-grid {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px 12px;
+    }
+    .roadmap-item {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 11px; color: var(--ink-2); line-height: 1.3;
+      padding: 2px 0;
+    }
+    .roadmap-item .material-icons { font-size: 14px; color: var(--primary); flex-shrink: 0; }
 
-    .footer-right { display: flex; align-items: center; gap: 14px; }
-    .thank-you { font-size: 10.5px; color: var(--ink-4); text-transform: none; letter-spacing: 0; font-style: italic; }
+    .personal-note {
+      border-left: 4px solid var(--primary);
+      padding: 9px 14px;
+      border-radius: 10px;
+      background: white;
+      border: 1px solid var(--line);
+      font-style: italic;
+      font-size: 12px;
+      line-height: 1.45;
+      color: var(--ink-2);
+    }
+    .personal-note .q { color: var(--primary-dark); font-weight: 600; font-style: normal; margin-right: 4px; }
   </style>
 </head>
 <body>
-  <div class="slide">
-    <!-- Top -->
-    <div>
-      <div class="eyebrow">PART 5 · REFLECTION</div>
-      <h1 class="h1" style="margin-top: 10px; max-width: 1130px;">
-        What I learned shipping this in 5 hours.
-      </h1>
-    </div>
+  <div class="slide slide-tight">
+    <span class="eyebrow">PART 5 · REFLECTION + ROADMAP</span>
 
-    <!-- 2x2 reflection cards -->
-    <div class="grid-2x2" style="margin-top: 16px;">
-      <!-- Card 1 -->
-      <div class="card ref-card">
-        <div class="ref-label-row">
-          <i class="material-icons" style="color: var(--primary);">build</i>
-          <span class="ref-label emerald">AI TOOLS I USED</span>
+    <h1 class="h1" style="margin-top: 8px; max-width: 1140px;">
+      What I learned — and where I'd take this with another week.
+    </h1>
+
+    <!-- 2x2 reflection grid -->
+    <div class="grid gap-3" style="margin-top: 12px; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;">
+      <div class="rcard">
+        <div class="lbl" style="color: var(--primary);">
+          <i class="material-icons">build</i>AI TOOLS I USED
         </div>
-        <div class="ref-title">The stack behind the stack</div>
-        <p class="ref-body">
-          Cursor + Claude for scaffolding the Next.js app and shadcn/ui components. GPT-4-class model (via z-ai-web-dev-sdk) as the actual fitment engine inside the prototype. I did NOT use AI to write the rubric or the bias guardrails — those came from reading about real recruiter workflows first.
-        </p>
+        <h3>The stack behind the stack</h3>
+        <p>Cursor + Claude for scaffolding the Next.js app and shadcn/ui components. GPT-4-class model (via z-ai-web-dev-sdk) as the fitment engine inside the prototype. I did NOT use AI to write the rubric or the bias guardrails — those came from reading about real recruiter workflows first.</p>
       </div>
-
-      <!-- Card 2 -->
-      <div class="card ref-card">
-        <div class="ref-label-row">
-          <i class="material-icons" style="color: var(--primary);">bolt</i>
-          <span class="ref-label emerald">HOW AI HELPED</span>
+      <div class="rcard">
+        <div class="lbl" style="color: var(--primary);">
+          <i class="material-icons">bolt</i>HOW AI HELPED
         </div>
-        <div class="ref-title">10x on the boring parts</div>
-        <p class="ref-body">
-          API routes, type definitions, component scaffolding — all 10x faster. It also caught edge cases I would have missed (empty resumes, oversized batches). That freed my time for the parts that actually matter: rubric design and prompt calibration.
-        </p>
+        <h3>10x on the boring parts</h3>
+        <p>API routes, type definitions, component scaffolding — all 10x faster. It also caught edge cases (empty resumes, oversized batches). That freed my time for the parts that matter: rubric design, prompt calibration, and running a real evaluation experiment.</p>
       </div>
-
-      <!-- Card 3 -->
-      <div class="card-amber ref-card">
-        <div class="ref-label-row">
-          <i class="material-icons" style="color: #b45309;">warning_amber</i>
-          <span class="ref-label amber">BIGGEST CHALLENGE</span>
+      <div class="rcard amber">
+        <div class="lbl" style="color: #92400e;">
+          <i class="material-icons">warning_amber</i>BIGGEST CHALLENGE
         </div>
-        <div class="ref-title">Calibration, not capability</div>
-        <p class="ref-body">
-          The first prompt gave almost everyone 75+. The model wasn't dumb — it was being too polite. Fix: explicit rubric weights, a hard rule that Strong Fit (≥80) should be rare, and a calibration line in the system prompt. V2 correctly flagged only 1 of 5 sample candidates as Strong Fit.
-        </p>
+        <h3>Calibration, not capability</h3>
+        <p>The first prompt gave almost everyone 75+. The fix — a calibration line — overcorrected: the eval showed 67% label agreement and 60% precision@10. The AI RANKS the right candidates at the top (ranking quality is solid) but is too conservative with Strong Fit labels. The #1 fix for v1.1 is tuning the calibration line so Strong Fit isn't too rare.</p>
       </div>
-
-      <!-- Card 4 -->
-      <div class="card-emerald ref-card">
-        <div class="ref-label-row">
-          <i class="material-icons" style="color: var(--primary-dark);">rocket_launch</i>
-          <span class="ref-label emerald">IF I HAD ANOTHER WEEK</span>
+      <div class="rcard emerald">
+        <div class="lbl" style="color: var(--primary-dark);">
+          <i class="material-icons">lightbulb</i>CORE BET
         </div>
-        <div class="ref-title">Where I'd take it next</div>
-        <ul class="ref-bullets">
-          <li>Bias-audit dashboard (track score distributions across name/gender proxies)</li>
-          <li>Real PDF resume parsing, not just paste</li>
-          <li>Embeddings-based semantic skill matching ("TS" → "TypeScript")</li>
-          <li>Greenhouse / Lever integration + a second-opinion pass on borderline calls</li>
-        </ul>
+        <h3>Explainable AI wins</h3>
+        <p>Resume screeners are a dime a dozen. The differentiator isn't another black-box ranker — it's a ranker where every score comes with matched skills, missing skills, strengths, red flags, and a written rationale. Recruiters don't need a magic number. They need a defensible recommendation.</p>
       </div>
     </div>
 
-    <!-- Personal note bar -->
-    <div class="note-bar">
-      <p class="note-text">
-        "This was the most fun I've had on a take-home. The hardest part wasn't the code — it was resisting the urge to over-build. I kept asking: would a recruiter actually use this on Monday?"
-      </p>
+    <!-- Roadmap bar -->
+    <div class="roadmap" style="margin-top: 12px;">
+      <div class="rh">
+        <i class="material-icons">flag</i>
+        <span>If I had another week:</span>
+      </div>
+      <div class="roadmap-grid">
+        <div class="roadmap-item"><i class="material-icons">security</i><span>Bias-audit dashboard (score distributions across demographic proxies)</span></div>
+        <div class="roadmap-item"><i class="material-icons">picture_as_pdf</i><span>Real PDF resume parsing</span></div>
+        <div class="roadmap-item"><i class="material-icons">hub</i><span>Embeddings + vector store for semantic skill matching</span></div>
+        <div class="roadmap-item"><i class="material-icons">sync</i><span>Recruiter feedback loop (overrides feed back into calibration)</span></div>
+        <div class="roadmap-item"><i class="material-icons">link</i><span>Greenhouse / Lever ATS integration</span></div>
+        <div class="roadmap-item"><i class="material-icons">gavel</i><span>Dual-pass scoring on borderline calls (60-79)</span></div>
+      </div>
     </div>
 
-    <!-- Footer -->
+    <!-- Differentiator banner -->
+    <div class="card-emerald diff-banner" style="margin-top: 8px;">
+      <span class="lbl">Explainable AI</span>
+      <span>It's not just a feature — it's the core bet. A defensible score beats a magic number, every time.</span>
+    </div>
+
+    <!-- Personal note -->
+    <div class="personal-note" style="margin-top: 6px;">
+      <span class="q">"</span>This was the most fun I've had on a take-home. The hardest part wasn't the code — it was resisting the urge to over-build. I kept asking: would a recruiter actually use this on Monday? And then I ran the evaluation to check if the answer was yes.<span class="q">"</span>
+    </div>
+
     <div class="slide-footer">
       <div class="brand"><span class="dot"></span>ScreenWise · Embark Assignment</div>
-      <div class="footer-right">
-        <span class="thank-you">Thank you — looking forward to the conversation.</span>
-        <div class="num">06 / 06</div>
-      </div>
+      <div class="num">06 / 06 · Thank you — looking forward to the conversation.</div>
     </div>
   </div>
 
   <aside data-notes class="hidden" style="display:none">
-    - Be candid about tooling: Cursor + Claude for scaffolding, GPT-4-class for the engine. The rubric and bias guardrails were NOT AI-written — those came from reading recruiter workflows.
-    - Frame the "10x on boring parts" point carefully — AI accelerated the plumbing, which freed real time for the actual hard problem (calibration).
-    - The biggest challenge story is the most honest moment: first prompt gave everyone 75+. Fix was a calibration rule, not a model upgrade. V2 gave only 1 of 5 Strong Fit.
-    - Future roadmap: bias-audit dashboard, real PDF parsing, embeddings for skill matching, ATS integration. Show I'm thinking about v1.1, not just v0.1.
-    - Land on the personal note — "would a recruiter actually use this on Monday?" That's the through-line of the whole deck. Thank the team, signal I want the conversation.
+    - Be candid about the AI tools: Cursor + Claude for scaffolding, GPT-4-class model as the fitment engine — but the rubric and bias guardrails were hand-written.
+    - Celebrate where AI helped most: 10x on the boring parts (API routes, types, components), freeing time for rubric and evaluation work.
+    - Own the biggest challenge: calibration, not capability — the first prompt over-scored, the fix overcorrected to conservatism.
+    - Restate the core bet: explainable AI beats black-box ranking because recruiters need defensible recommendations.
+    - Close on the roadmap (bias-audit, PDF parsing, embeddings, feedback loop, ATS integration, dual-pass scoring) and the personal note about resisting over-building.
   </aside>
 </body>
 </html>

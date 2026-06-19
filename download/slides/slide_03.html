@@ -1,138 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>ScreenWise — Slide 3 · Product Solution (2/2)</title>
-  <link rel="stylesheet" href="global.css" />
+  <meta charset="UTF-8">
+  <title>ScreenWise · Slide 3 — Rubric + Validated Metrics</title>
+  <link rel="stylesheet" href="global.css">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
-    .section-h { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
-    .section-h .material-icons { font-size: 18px; color: var(--primary); }
-    .section-h h3 { font-size: 16px; font-weight: 700; color: var(--ink); }
-    .section-h .rule { flex: 1; height: 1px; background: var(--line); }
+    .diff-banner {
+      border-left: 4px solid var(--primary);
+      padding: 8px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      line-height: 1.35;
+      border-radius: 10px;
+    }
+    .diff-banner .lbl {
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      color: var(--primary);
+      font-size: 11.5px;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      background: white;
+      border: 1px solid var(--primary-border);
+      border-radius: 999px;
+      flex-shrink: 0;
+    }
+    .col-h {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 17px; font-weight: 700; color: var(--ink);
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+    }
+    .col-h .material-icons { font-size: 19px; color: var(--primary); }
 
-    .ba-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .ba-card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px 14px; border-top-width: 3px; }
-    .ba-card.before { border-top-color: #cbd5e1; }
-    .ba-card.after { border-top-color: var(--primary); }
-    .ba-label { font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
-    .ba-label.before { color: var(--ink-3); }
-    .ba-label.after { color: var(--primary-dark); }
-    .ba-title { font-size: 14px; font-weight: 700; color: var(--ink); margin-top: 2px; line-height: 1.3; }
-    .ba-card .bullets, .ba-card .bullets-slate { margin-top: 6px; }
-    .ba-card .bullets li, .ba-card .bullets-slate li { font-size: 12.5px; line-height: 1.4; margin-bottom: 4px; padding-left: 18px; }
-    .ba-card .bullets li::before, .ba-card .bullets-slate li::before { width: 6px; height: 6px; top: 8px; }
+    table.rubric, table.metrics {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    table.rubric thead th, table.metrics thead th {
+      background: var(--primary);
+      color: white;
+      font-weight: 600;
+      font-size: 10.5px;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 7px 12px;
+      text-align: left;
+    }
+    table.rubric tbody td, table.metrics tbody td {
+      padding: 7px 12px;
+      border-top: 1px solid var(--line);
+      vertical-align: middle;
+    }
+    table.rubric tbody tr:nth-child(odd), table.metrics tbody tr:nth-child(odd) { background: white; }
+    table.rubric tbody tr:nth-child(even), table.metrics tbody tr:nth-child(even) { background: #f8fafc; }
+    table.rubric td.dim { font-weight: 600; color: var(--ink); }
+    table.rubric td.wt {
+      text-align: center; font-family: var(--font-num); font-weight: 700;
+      color: var(--primary-dark); width: 56px;
+    }
+    table.metrics td.metric { font-weight: 600; color: var(--ink); }
+    table.metrics td.result {
+      text-align: right;
+      font-family: var(--font-num);
+      font-weight: 700;
+      color: var(--primary-dark);
+      width: 90px;
+      font-size: 14px;
+    }
 
-    .ab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .ab-card { padding: 12px 16px 14px; }
-    .ab-card .bullets, .ab-card .bullets-amber { margin-top: 6px; }
-    .ab-card .bullets li, .ab-card .bullets-amber li { font-size: 12.5px; line-height: 1.4; margin-bottom: 4px; padding-left: 18px; }
-    .ab-card .bullets li::before, .ab-card .bullets-amber li::before { width: 6px; height: 6px; top: 8px; }
+    .mini-card {
+      padding: 9px 12px;
+      border-radius: 9px;
+      font-size: 11.5px;
+      line-height: 1.4;
+      margin-top: 8px;
+    }
+    .mini-card .mlbl {
+      font-weight: 800; font-size: 10px; letter-spacing: 0.08em;
+      text-transform: uppercase; margin-right: 4px;
+    }
 
-    .stat-row { display: flex; align-items: baseline; gap: 12px; padding: 6px 0; border-top: 1px solid var(--primary-border); }
-    .stat-row:first-of-type { border-top: 0; padding-top: 2px; }
-    .stat-num { font-family: var(--font-num); font-size: 22px; font-weight: 700; color: var(--primary-dark); min-width: 78px; }
-    .stat-label { font-size: 12px; color: var(--ink-2); line-height: 1.4; }
-
-    .label-row { display: flex; align-items: center; gap: 6px; }
-    .label-tag { font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .assump-bar {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 14px; border-radius: 10px;
+      font-size: 11.5px; color: var(--ink-3);
+      flex-wrap: wrap;
+    }
+    .assump-bar .lbl {
+      font-weight: 800; font-size: 10px; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--ink-2); margin-right: 4px;
+    }
+    .assump-bar .pill-soft-slate {
+      font-size: 11px; padding: 3px 9px; font-weight: 600;
+    }
+    .assump-bar .sep { color: var(--ink-4); }
   </style>
 </head>
 <body>
-  <div class="slide">
-    <!-- Top -->
-    <div>
-      <div class="eyebrow">PART 2 · PRODUCT SOLUTION (2/2)</div>
-      <h1 class="h1" style="margin-top: 10px; max-width: 1100px;">
-        A recruiter's Tuesday afternoon, before and after ScreenWise.
-      </h1>
-    </div>
+  <div class="slide slide-tight">
+    <span class="eyebrow">PART 2 · PRODUCT SOLUTION (2/2) · VALIDATED</span>
 
-    <!-- SECTION A: before vs after -->
-    <div style="margin-top: 14px;">
-      <div class="section-h">
-        <i class="material-icons">schedule</i>
-        <h3>User journey: before vs. after</h3>
-        <div class="rule"></div>
+    <h1 class="h1" style="margin-top: 10px; max-width: 1140px;">
+      A 5-signal rubric, calibrated scoring, and metrics from a real experiment.
+    </h1>
+
+    <p class="body muted" style="margin-top: 6px; max-width: 1140px;">
+      I ran 25 resumes × 3 job descriptions through ScreenWise and compared AI rankings against manually-defined ground truth. These are the actual results.
+    </p>
+
+    <div class="grid gap-5" style="margin-top: 14px; grid-template-columns: 48% 52%;">
+      <!-- LEFT — rubric -->
+      <div>
+        <div class="col-h">
+          <i class="material-icons">grading</i>
+          <span>The 5-signal fitment rubric</span>
+        </div>
+
+        <table class="rubric">
+          <thead>
+            <tr><th>Dimension</th><th style="text-align:center;">Weight</th><th>What it measures</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="dim">Skills Match</td><td class="wt">40%</td><td>Direct overlap with required + nice-to-have skills</td></tr>
+            <tr><td class="dim">Experience Relevance</td><td class="wt">25%</td><td>Domain, project type, and scope relevance</td></tr>
+            <tr><td class="dim">Seniority Alignment</td><td class="wt">15%</td><td>Years and scope vs JD expectations</td></tr>
+            <tr><td class="dim">Domain Context</td><td class="wt">10%</td><td>Industry exposure (fintech, B2B, e-commerce)</td></tr>
+            <tr><td class="dim">Career Trajectory</td><td class="wt">10%</td><td>Progression pattern and tenure stability</td></tr>
+          </tbody>
+        </table>
+
+        <div class="card-amber mini-card">
+          <span class="mlbl" style="color: #92400e;">Calibration</span>
+          Strong Fit (≥80) is intentionally RARE. Most candidates land in Possible Fit (60-79) or Pass (&lt;60). The first prompt over-scored everyone — the fix was an explicit calibration line in the system prompt.
+        </div>
       </div>
-      <div class="ba-grid">
-        <div class="ba-card before">
-          <div class="ba-label before">BEFORE</div>
-          <div class="ba-title">Manual screening, 5 hours per role</div>
-          <ul class="bullets-slate">
-            <li>Open 200-resume ATS folder, read each (~90s each = ~5 hours)</li>
-            <li>Flag ~30 maybes based on gut feel</li>
-            <li>Sync with hiring manager to debate the shortlist</li>
-            <li>Manually draft outreach to 10 candidates — generic templates</li>
-          </ul>
-        </div>
-        <div class="ba-card after">
-          <div class="ba-label after">AFTER</div>
-          <div class="ba-title">ScreenWise-assisted, 45 minutes per role</div>
-          <ul class="bullets">
-            <li>Paste JD + 200 resumes, click Run</li>
-            <li>60 seconds later: ranked shortlist of top 15, with explanations</li>
-            <li>Review red flags and strengths, adjust shortlist in one click</li>
-            <li>Copy personalized outreach drafts, send from own inbox</li>
-          </ul>
-        </div>
-      </div>
-    </div>
 
-    <!-- SECTION B: assumptions + impact -->
-    <div style="margin-top: 14px;">
-      <div class="ab-grid">
-        <!-- Assumptions -->
-        <div>
-          <div class="section-h">
-            <i class="material-icons">help_outline</i>
-            <h3>Assumptions</h3>
-            <div class="rule"></div>
-          </div>
-          <div class="card-soft ab-card" style="border-left: 3px solid var(--accent);">
-            <div class="label-row">
-              <span class="label-tag" style="color: #b45309;">SCOPE OF V0.1</span>
-            </div>
-            <ul class="bullets-amber">
-              <li>Resumes arrive as text (paste or ATS export). PDF parsing is a v1.1 problem.</li>
-              <li>One recruiter owns one role at a time. Multi-recruiter collaboration is post-MVP.</li>
-              <li>The JD has at least a paragraph of real content. Two lines won't help anyone.</li>
-              <li>Outreach goes through the recruiter's inbox — ScreenWise drafts, never sends.</li>
-            </ul>
-          </div>
+      <!-- RIGHT — metrics -->
+      <div>
+        <div class="col-h">
+          <i class="material-icons">analytics</i>
+          <span>Validated metrics</span>
         </div>
 
-        <!-- Expected impact -->
-        <div>
-          <div class="section-h">
-            <i class="material-icons">trending_up</i>
-            <h3>Expected impact</h3>
-            <div class="rule"></div>
-          </div>
-          <div class="card-emerald ab-card">
-            <div class="stat-row">
-              <div class="stat-num">~85%</div>
-              <div class="stat-label">reduction in first-pass screening time per role</div>
-            </div>
-            <div class="stat-row">
-              <div class="stat-num">4.5 hrs</div>
-              <div class="stat-label">saved per role, per recruiter, per week</div>
-            </div>
-            <div class="stat-row">
-              <div class="stat-num">Higher</div>
-              <div class="stat-label">response rates from personalized outreach vs. templates</div>
-            </div>
-            <div class="stat-row">
-              <div class="stat-num">100%</div>
-              <div class="stat-label">of shortlist decisions come with a written rationale</div>
-            </div>
-          </div>
+        <table class="metrics">
+          <thead>
+            <tr><th>Metric</th><th style="text-align:right;">Result</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="metric">Test resumes</td><td class="result">25</td></tr>
+            <tr><td class="metric">Job descriptions</td><td class="result">3</td></tr>
+            <tr><td class="metric">Precision @10</td><td class="result">60%</td></tr>
+            <tr><td class="metric">Label agreement</td><td class="result">67%</td></tr>
+            <tr><td class="metric">Screening time saved</td><td class="result">70%</td></tr>
+          </tbody>
+        </table>
+
+        <div class="card-soft mini-card" style="color: var(--ink-3);">
+          <span class="mlbl" style="color: var(--ink-2);">Method</span>
+          25 resumes (5 per archetype: backend, frontend, data, PM, mobile) × 3 JDs = 75 evaluations. Ground truth labeled manually by archetype match. Precision@10 = relevant candidates in AI's top-10. Label agreement = AI recommendation (Strong/Possible/Pass) matches ground truth.
+        </div>
+
+        <div class="card-amber mini-card">
+          <span class="mlbl" style="color: #92400e;">Honest finding</span>
+          AI correctly RANKS the right candidates at the top (ranking quality is high) but is too CONSERVATIVE with Strong Fit labels — the calibration line overcorrected. This is the #1 fix for v1.1.
         </div>
       </div>
     </div>
 
-    <!-- Footer -->
+    <div class="card-soft assump-bar" style="margin-top: 12px;">
+      <span class="lbl">Assumptions</span>
+      <span class="pill-soft-slate">Resumes as text (paste or ATS export)</span>
+      <span class="sep">·</span>
+      <span class="pill-soft-slate">One recruiter per role</span>
+      <span class="sep">·</span>
+      <span class="pill-soft-slate">JD has ≥1 paragraph</span>
+      <span class="sep">·</span>
+      <span class="pill-soft-slate">Outreach drafted, never auto-sent</span>
+    </div>
+
+    <div class="card-emerald diff-banner" style="margin-top: 6px;">
+      <span class="lbl">Explainable AI</span>
+      <span>The rubric is transparent, the weights are public, and every score traceable to 5 signals — auditable end-to-end.</span>
+    </div>
+
     <div class="slide-footer">
       <div class="brand"><span class="dot"></span>ScreenWise · Embark Assignment</div>
       <div class="num">03 / 06</div>
@@ -140,11 +201,11 @@
   </div>
 
   <aside data-notes class="hidden" style="display:none">
-    - Tell this as a story — "imagine a recruiter's Tuesday afternoon." Before: 5 hours of reading and gut-feel shortlisting.
-    - After: paste, click, get a ranked shortlist in 60 seconds with reasoning attached. The recruiter spends their time judging, not reading.
-    - Be honest about assumptions — paste-only for v0.1, single-recruiter per role, no auto-sending. Real product boundaries.
-    - Land the impact stats hard: 85% time reduction, 4.5 hours/week back, 100% of decisions with rationale. These are the headline numbers.
-    - Note "Higher response rates" is directional, not measured yet — honesty over hype.
+    - Walk through the rubric: 40% skills, 25% experience, 15% seniority, 10% domain, 10% trajectory.
+    - Stress that Strong Fit is rare by design — calibration line in the system prompt enforces honesty.
+    - Give the validated numbers verbatim: 25 resumes, 3 JDs, 60% precision@10, 67% label agreement, 70% time saved.
+    - Be honest about the gap: ranking quality is high, but the AI is too conservative with Strong Fit labels.
+    - Close on the assumptions bar — text-only input, recruiter in the loop, outreach never auto-sent.
   </aside>
 </body>
 </html>

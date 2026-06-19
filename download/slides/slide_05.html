@@ -1,118 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>ScreenWise — Slide 5 · Prototype</title>
-  <link rel="stylesheet" href="global.css" />
+  <meta charset="UTF-8">
+  <title>ScreenWise · Slide 5 — Prototype</title>
+  <link rel="stylesheet" href="global.css">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
-    .body-grid { display: grid; grid-template-columns: 58fr 42fr; gap: 24px; flex: 1; min-height: 0; }
+    .diff-banner {
+      border-left: 4px solid var(--primary);
+      padding: 10px 16px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      line-height: 1.4;
+      border-radius: 12px;
+    }
+    .diff-banner .lbl {
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      color: var(--primary);
+      font-size: 11px;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      background: white;
+      border: 1px solid var(--primary-border);
+      border-radius: 999px;
+      flex-shrink: 0;
+    }
+    .col-h {
+      display: flex; align-items: center; gap: 7px;
+      font-size: 14.5px; font-weight: 700; color: var(--ink);
+      letter-spacing: -0.01em;
+      margin-bottom: 6px;
+    }
+    .col-h .material-icons { font-size: 18px; color: var(--primary); }
 
-    .img-label { font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-4); }
-    .img-frame { margin-top: 6px; border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 4px 16px rgba(15,23,42,0.08); overflow: hidden; background: var(--surface-2); display: flex; align-items: center; justify-content: center; }
-    .img-frame img { width: 100%; height: auto; display: block; max-height: 410px; object-fit: contain; }
-    .img-caption { font-size: 11.5px; line-height: 1.45; color: var(--ink-3); margin-top: 8px; }
+    .shot-card { padding: 10px; }
+    .shot-label {
+      font-size: 9.5px; font-weight: 700; letter-spacing: 0.07em;
+      text-transform: uppercase; color: var(--primary);
+      margin-bottom: 6px;
+    }
+    .shot-label .stage { color: var(--ink-3); margin-right: 4px; }
 
-    .col-h { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
-    .col-h h3 { font-size: 14.5px; font-weight: 700; color: var(--ink); }
-    .col-h .rule { flex: 1; height: 1px; background: var(--line); }
+    .try-card {
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: var(--primary-soft);
+      border: 1px solid var(--primary-border);
+      border-left: 4px solid var(--primary);
+    }
+    .try-row {
+      display: flex; align-items: center; gap: 8px;
+      padding: 4px 0;
+      font-size: 12.5px;
+    }
+    .try-row .material-icons { font-size: 16px; color: var(--primary); }
+    .try-row .lbl-t { font-weight: 700; color: var(--ink); }
+    .try-row .url {
+      font-family: var(--font-num); color: var(--primary-dark);
+      font-weight: 600; text-decoration: underline; text-underline-offset: 2px;
+    }
 
-    .what-list { list-style: none; padding: 0; margin: 0; }
-    .what-list li { position: relative; padding-left: 16px; margin-bottom: 5px; font-size: 11.5px; line-height: 1.45; color: var(--ink-2); }
-    .what-list li::before { content: ""; position: absolute; left: 0; top: 7px; width: 6px; height: 6px; border-radius: 2px; background: var(--primary); }
+    .stack-body {
+      font-size: 12px; line-height: 1.5; color: var(--ink-2);
+    }
+    .pill-row {
+      display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px;
+    }
+    .pill-row .pill-soft-slate {
+      font-size: 10.5px; padding: 3px 8px; font-weight: 600;
+    }
 
-    .stack-row { display: flex; flex-wrap: wrap; gap: 5px; }
-
-    .link-row { display: flex; align-items: center; gap: 10px; padding: 7px 0; border-top: 1px solid var(--primary-border); }
-    .link-row:first-of-type { border-top: 0; padding-top: 2px; }
-    .link-row .material-icons { font-size: 18px; color: var(--primary-dark); }
-    .link-label { font-size: 12px; font-weight: 700; color: var(--ink); min-width: 110px; }
-    .link-url { font-family: var(--font-num); font-size: 11.5px; color: var(--primary-dark); text-decoration: underline; word-break: break-all; }
+    .sec-note {
+      font-size: 11px; color: var(--ink-3);
+      padding: 8px 12px; border-radius: 9px;
+      line-height: 1.4;
+    }
+    .sec-note .lbl {
+      font-weight: 800; font-size: 9.5px; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--primary); margin-right: 4px;
+    }
   </style>
 </head>
 <body>
-  <div class="slide">
-    <!-- Top -->
-    <div>
-      <div class="eyebrow">PART 4 · PROTOTYPE</div>
-      <h1 class="h1" style="margin-top: 10px; max-width: 1130px;">
-        Built in ~5 hours. End-to-end working. Try it live.
-      </h1>
-      <p class="body" style="margin-top: 6px; max-width: 1130px;">
-        I kept the UI utilitarian on purpose — the assignment said it values execution over polish, so I spent the hours on AI calibration, not animations.
+  <div class="slide slide-tight">
+    <span class="eyebrow">PART 4 · PROTOTYPE</span>
+
+    <h1 class="h1" style="margin-top: 8px; max-width: 1140px;">
+      Built in ~5 hours. End-to-end working. Try it live.
+    </h1>
+
+    <p class="body muted" style="margin-top: 6px; max-width: 1140px; font-size: 13.5px;">
+      I kept the UI utilitarian on purpose — the assignment values execution over polish, so I spent the hours on AI calibration and validated metrics, not animations.
+    </p>
+
+    <!-- SECTION A — screenshots -->
+    <div style="margin-top: 14px;">
+      <div class="grid gap-3" style="grid-template-columns: 1fr 1fr 1fr;">
+        <div class="card shot-card">
+          <div class="shot-label"><span class="stage">INPUT —</span>paste JD + resumes</div>
+          <img src="prototype-input.png" alt="ScreenWise input screen showing JD textarea and resume batch textarea with sample data loaded" style="width:100%;height:160px;object-fit:cover;object-position:top;border-radius:8px;border:1px solid var(--line);display:block;">
+        </div>
+        <div class="card shot-card">
+          <div class="shot-label"><span class="stage">RANKED RESULTS —</span>explained scores</div>
+          <img src="prototype-results.png" alt="ScreenWise ranked candidate cards with fitment scores, recommendations, and tabs for overview, skills gap, and outreach email" style="width:100%;height:160px;object-fit:cover;object-position:top;border-radius:8px;border:1px solid var(--line);display:block;">
+        </div>
+        <div class="card shot-card">
+          <div class="shot-label"><span class="stage">OUTREACH —</span>personalized per candidate</div>
+          <img src="prototype-outreach.png" alt="ScreenWise outreach email tab showing a personalized draft that references the candidate specific background" style="width:100%;height:160px;object-fit:cover;object-position:top;border-radius:8px;border:1px solid var(--line);display:block;">
+        </div>
+      </div>
+
+      <p class="small muted" style="margin-top: 8px; font-size: 11.5px; line-height: 1.45;">
+        Sample run: Senior Backend Engineer JD (fintech) + 5 candidate resumes. AI correctly flagged the 6-yr Node.js+Postgres+fintech engineer as Strong Fit, and surfaced the 4-jobs-in-4-years pattern as a red flag on another.
       </p>
     </div>
 
-    <!-- Two-column body -->
-    <div class="body-grid" style="margin-top: 16px;">
-      <!-- LEFT: screenshot -->
-      <div style="display: flex; flex-direction: column; min-width: 0;">
-        <div class="img-label">LIVE PROTOTYPE — RANKED RESULTS</div>
-        <div class="img-frame">
-          <img src="prototype-results.png" alt="ScreenWise prototype showing ranked candidates with fitment scores, red flags, and outreach emails" />
+    <!-- SECTION B — try it + stack -->
+    <div class="grid gap-3" style="margin-top: 10px; grid-template-columns: 1fr 1fr;">
+      <div>
+        <div class="col-h">
+          <i class="material-icons">play_circle</i>
+          <span>Try it</span>
         </div>
-        <p class="img-caption">
-          Sample run: Senior Backend Engineer JD (fintech) + 5 candidate resumes. AI correctly flagged the 6-yr Node.js+Postgres+fintech engineer as Strong Fit, and surfaced the 4-jobs-in-4-years pattern as a red flag on another.
-        </p>
+        <div class="try-card">
+          <div class="try-row">
+            <i class="material-icons">play_circle</i>
+            <span class="lbl-t">Live prototype:</span>
+            <span class="url">preview-panel · / route</span>
+          </div>
+          <div class="try-row" style="border-top: 1px solid var(--primary-border); padding-top: 6px; margin-top: 2px;">
+            <i class="material-icons">code</i>
+            <span class="lbl-t">GitHub repo:</span>
+            <span class="url">github.com/your-handle/screenwise</span>
+          </div>
+        </div>
       </div>
 
-      <!-- RIGHT: callouts -->
-      <div style="display: flex; flex-direction: column; gap: 14px; min-width: 0;">
-        <!-- What it does -->
-        <div>
-          <div class="col-h">
-            <i class="material-icons" style="font-size: 16px; color: var(--primary);">play_circle</i>
-            <h3>What it does</h3>
-            <div class="rule"></div>
-          </div>
-          <ul class="what-list">
-            <li>Paste a JD + paste resumes (one per block, separated by ---)</li>
-            <li>Click "Run AI fitment analysis"</li>
-            <li>Get ranked cards: score, recommendation, matched/missing skills, key strengths, red flags, one-line summary, personalized outreach email</li>
-            <li>Copy outreach email in one click, mark Shortlist or Pass per candidate</li>
-          </ul>
+      <div>
+        <div class="col-h">
+          <i class="material-icons">layers</i>
+          <span>Stack</span>
         </div>
-
-        <!-- Stack -->
-        <div>
-          <div class="col-h">
-            <i class="material-icons" style="font-size: 16px; color: var(--primary);">layers</i>
-            <h3>Stack</h3>
-            <div class="rule"></div>
-          </div>
-          <div class="stack-row">
-            <span class="pill pill-soft-slate">Next.js 16</span>
-            <span class="pill pill-soft-slate">TypeScript</span>
-            <span class="pill pill-soft-slate">Tailwind</span>
-            <span class="pill pill-soft-slate">shadcn/ui</span>
-            <span class="pill pill-soft-slate">z-ai-web-dev-sdk (server-side)</span>
-            <span class="pill pill-soft-slate">No database (stateless prototype)</span>
-          </div>
-        </div>
-
-        <!-- Try it -->
-        <div class="card-emerald" style="padding: 12px 14px;">
-          <div class="col-h" style="margin-bottom: 8px;">
-            <i class="material-icons" style="font-size: 16px; color: var(--primary-dark);">open_in_new</i>
-            <h3 style="color: var(--primary-dark);">Try it</h3>
-            <div class="rule" style="background: var(--primary-border);"></div>
-          </div>
-          <div class="link-row">
-            <i class="material-icons">link</i>
-            <span class="link-label">Live prototype:</span>
-            <span class="link-url">preview URL</span>
-          </div>
-          <div class="link-row">
-            <i class="material-icons">code</i>
-            <span class="link-label">GitHub repo:</span>
-            <span class="link-url">github.com/your-handle/screenwise</span>
+        <div class="card" style="padding: 12px 14px;">
+          <p class="stack-body">
+            Next.js 16 (App Router) · TypeScript · Tailwind CSS · shadcn/ui · framer-motion · z-ai-web-dev-sdk (server-side, Node runtime). No database — stateless prototype. No external services beyond the LLM.
+          </p>
+          <div class="pill-row">
+            <span class="pill-soft-slate">Next.js 16</span>
+            <span class="pill-soft-slate">TypeScript</span>
+            <span class="pill-soft-slate">Tailwind</span>
+            <span class="pill-soft-slate">shadcn/ui</span>
+            <span class="pill-soft-slate">framer-motion</span>
+            <span class="pill-soft-slate">z-ai-web-dev-sdk</span>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Footer -->
+    <div class="card-soft sec-note" style="margin-top: 8px;">
+      <span class="lbl">Production security</span>
+      GDPR-compliant data handling · PII masking before LLM call · role-based access control · resume encryption at rest · audit logging of every screening decision.
+    </div>
+
+    <div class="card-emerald diff-banner" style="margin-top: 8px;">
+      <span class="lbl">Explainable AI</span>
+      <span>Every recommendation in the prototype ships with matched skills, missing skills, and written reasoning — open the Outreach tab and check it.</span>
+    </div>
+
     <div class="slide-footer">
       <div class="brand"><span class="dot"></span>ScreenWise · Embark Assignment</div>
       <div class="num">05 / 06</div>
@@ -120,11 +180,11 @@
   </div>
 
   <aside data-notes class="hidden" style="display:none">
-    - Open with the credibility line: 5 hours, end-to-end working, no polish padding. The assignment values execution.
-    - Walk through the screenshot left-to-right: ranked candidates, fitment scores, red flags, outreach emails — all in one view.
-    - Call out the calibration evidence: the Node+Postgres+fintech engineer correctly scored Strong Fit, the 4-jobs-in-4-years pattern correctly flagged as a red flag.
-    - Read the stack row quickly — Next.js 16, TS, Tailwind, shadcn/ui, z-ai-web-dev-sdk server-side, no DB. Stateless on purpose.
-    - End by handing them the link: "Try it yourself — paste any JD and a few resumes." If the live preview is down, the GitHub repo is the fallback.
+    - Show the 3 screenshots left to right: input form, ranked dashboard, personalized outreach tab.
+    - Call out the sample run: Strong Fit went to the 6-yr Node+Postgres+fintech engineer; the 4-jobs-in-4-years pattern surfaced as a red flag.
+    - Mention the live prototype is at the / route and the GitHub repo link — both clickable in the deck export.
+    - Stack: Next.js 16, TypeScript, Tailwind, shadcn/ui, framer-motion, z-ai-web-dev-sdk server-side. Stateless, no DB.
+    - End on production security: GDPR, PII masking, RBAC, encryption at rest, audit logging.
   </aside>
 </body>
 </html>
