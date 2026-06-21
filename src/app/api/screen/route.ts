@@ -37,6 +37,38 @@ async function createZAIClient() {
   return await ZAI.create()
 }
 
+/**
+ * Proxy fallback: if the direct ZAI call fails (e.g. on Vercel where the
+ * internal-api.z.ai endpoint is unreachable), forward the request to the
+ * sandbox preview URL which CAN reach the ZAI API.
+ *
+ * Set PROXY_FALLBACK_URL env var to the public sandbox URL to enable.
+ */
+async function proxyToSandbox(body: ScreeningRequest): Promise<{ data: ScreeningResponse | null; error?: string }> {
+  const proxyUrl = process.env.PROXY_FALLBACK_URL
+  if (!proxyUrl) {
+    return { data: null, error: 'PROXY_FALLBACK_URL not set' }
+  }
+
+  const targetUrl = `${proxyUrl.replace(/\/$/, '')}/api/screen`
+  try {
+    const res = await fetch(targetUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+      signal: AbortSignal.timeout(55000), // 55s, leaving 5s buffer
+    })
+    if (!res.ok) {
+      const errText = await res.text().catch(() => '')
+      return { data: null, error: `Proxy HTTP ${res.status}: ${errText.slice(0, 200)}` }
+    }
+    const data = (await res.json()) as ScreeningResponse
+    return { data, error: undefined }
+  } catch (err: any) {
+    return { data: null, error: `Proxy fetch failed: ${err?.message ?? 'unknown error'}` }
+  }
+}
+
 const SYSTEM_PROMPT = `You are ScreenWise, an AI recruiting copilot used by talent-acquisition teams at fast-growing companies. Your job is to evaluate candidate resumes against a job description and produce structured, honest, explainable fitment assessments.
 
 You are not a cheerleader. You are a calibrated evaluator. Most candidates are NOT a strong fit. Be specific, evidence-based, and useful to a busy recruiter who has 90 seconds per candidate.
@@ -195,6 +227,30 @@ export async function POST(req: Request) {
     return NextResponse.json<ScreeningResponse>(
       { success: false, jobSummary: '', evaluations: [], error: 'Prototype limit: max 8 candidates per batch. Trim the list and try again.' },
       { status: 400 }
+    )
+  }
+
+  // The request body, reusable if we need to proxy
+  const requestBody: ScreeningRequest = { jobDescription: jd, resumes: validResumes }
+
+  // On Vercel, the ZAI internal endpoint (internal-api.z.ai) is unreachable
+  // (private IP). Detect Vercel environment and go straight to the proxy.
+  const isVercel = !!process.env.VERCEL || !!process.env.VERCEL_ENV
+
+  if (isVercel) {
+    // Skip the direct ZAI call — it will fail. Go straight to the proxy.
+    const { data: proxied, error: proxyError } = await proxyToSandbox(requestBody)
+    if (proxied?.success) {
+      return NextResponse.json<ScreeningResponse>(proxied)
+    }
+    return NextResponse.json<ScreeningResponse>(
+      {
+        success: false,
+        jobSummary: '',
+        evaluations: [],
+        error: `Proxy fallback failed: ${proxyError || 'unknown'}. PROXY_FALLBACK_URL=${process.env.PROXY_FALLBACK_URL || '(not set)'}`,
+      },
+      { status: 502 }
     )
   }
 
