@@ -56,7 +56,7 @@ async function proxyToSandbox(body: ScreeningRequest): Promise<{ data: Screening
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
-      signal: AbortSignal.timeout(55000), // 55s, leaving 5s buffer
+      signal: AbortSignal.timeout(50000), // 50s buffer within 60s maxDuration
     })
     if (!res.ok) {
       const errText = await res.text().catch(() => '')
@@ -65,7 +65,11 @@ async function proxyToSandbox(body: ScreeningRequest): Promise<{ data: Screening
     const data = (await res.json()) as ScreeningResponse
     return { data, error: undefined }
   } catch (err: any) {
-    return { data: null, error: `Proxy fetch failed: ${err?.message ?? 'unknown error'}` }
+    const msg = err?.message ?? 'unknown error'
+    if (msg.includes('abort') || msg.includes('timeout')) {
+      return { data: null, error: 'Proxy timed out — the AI took too long to respond. Try with fewer candidates.' }
+    }
+    return { data: null, error: `Proxy fetch failed: ${msg}` }
   }
 }
 
