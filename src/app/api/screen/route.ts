@@ -43,6 +43,9 @@ async function createZAIClient() {
  * sandbox preview URL which CAN reach the ZAI API.
  *
  * Set PROXY_FALLBACK_URL env var to the public sandbox URL to enable.
+ *
+ * Includes retry logic (3 attempts with 2s delay) to handle transient
+ * sandbox hiccups (502 Bad Gateway, brief restarts, etc).
  */
 async function proxyToSandbox(body: ScreeningRequest): Promise<{ data: ScreeningResponse | null; error?: string }> {
   const proxyUrl = process.env.PROXY_FALLBACK_URL
@@ -51,26 +54,55 @@ async function proxyToSandbox(body: ScreeningRequest): Promise<{ data: Screening
   }
 
   const targetUrl = `${proxyUrl.replace(/\/$/, '')}/api/screen`
-  try {
-    const res = await fetch(targetUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
-      signal: AbortSignal.timeout(50000), // 50s buffer within 60s maxDuration
-    })
-    if (!res.ok) {
+  const MAX_ATTEMPTS = 3
+  const RETRY_DELAY_MS = 2000
+  let lastError = ''
+
+  for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+    try {
+      const res = await fetch(targetUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+        signal: AbortSignal.timeout(45000), // 45s per attempt — leaves room for retries within 60s maxDuration
+      })
+
+      if (res.ok) {
+        const data = (await res.json()) as ScreeningResponse
+        return { data, error: undefined }
+      }
+
+      // Non-OK response — check if it's retryable
       const errText = await res.text().catch(() => '')
-      return { data: null, error: `Proxy HTTP ${res.status}: ${errText.slice(0, 200)}` }
+      lastError = `Proxy HTTP ${res.status}: ${errText.slice(0, 150)}`
+
+      // Retry on 502, 503, 504 (gateway errors = transient sandbox issues)
+      const retryable = [502, 503, 504].includes(res.status)
+      if (!retryable || attempt === MAX_ATTEMPTS) {
+        return { data: null, error: lastError }
+      }
+      // Wait before retrying
+      await new Promise((r) => setTimeout(r, RETRY_DELAY_MS))
+    } catch (err: any) {
+      const msg = err?.message ?? 'unknown error'
+      if (msg.includes('abort') || msg.includes('timeout')) {
+        lastError = 'Proxy timed out — the AI took too long to respond. Try with fewer candidates.'
+        if (attempt === MAX_ATTEMPTS) {
+          return { data: null, error: lastError }
+        }
+        await new Promise((r) => setTimeout(r, RETRY_DELAY_MS))
+      } else {
+        // Network error (fetch failed, connection refused, etc.) — retryable
+        lastError = `Proxy fetch failed: ${msg}`
+        if (attempt === MAX_ATTEMPTS) {
+          return { data: null, error: lastError }
+        }
+        await new Promise((r) => setTimeout(r, RETRY_DELAY_MS))
+      }
     }
-    const data = (await res.json()) as ScreeningResponse
-    return { data, error: undefined }
-  } catch (err: any) {
-    const msg = err?.message ?? 'unknown error'
-    if (msg.includes('abort') || msg.includes('timeout')) {
-      return { data: null, error: 'Proxy timed out — the AI took too long to respond. Try with fewer candidates.' }
-    }
-    return { data: null, error: `Proxy fetch failed: ${msg}` }
   }
+
+  return { data: null, error: lastError || 'Proxy failed after all retries' }
 }
 
 const SYSTEM_PROMPT = `You are ScreenWise, an AI recruiting copilot used by talent-acquisition teams at fast-growing companies. Your job is to evaluate candidate resumes against a job description and produce structured, honest, explainable fitment assessments.
@@ -247,12 +279,13 @@ export async function POST(req: Request) {
     if (proxied?.success) {
       return NextResponse.json<ScreeningResponse>(proxied)
     }
+    // Return a user-friendly error after all retries failed
     return NextResponse.json<ScreeningResponse>(
       {
         success: false,
         jobSummary: '',
         evaluations: [],
-        error: `Proxy fallback failed: ${proxyError || 'unknown'}. PROXY_FALLBACK_URL=${process.env.PROXY_FALLBACK_URL || '(not set)'}`,
+        error: 'The AI screening service is temporarily unavailable. Please try again in a few seconds.',
       },
       { status: 502 }
     )
